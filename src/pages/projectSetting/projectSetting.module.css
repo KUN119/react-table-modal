@@ -1,0 +1,155 @@
+::-webkit-scrollbar {
+    width: 6px; /* 스크롤바의 width */
+    height: 6px;
+  }
+  
+  /* 스크롤바 막대 */
+  ::-webkit-scrollbar-thumb {
+    background: #115FF8; /* 스크롤바 막대 색상 */
+    border: 1px solid #eee; /* 스크롤바 막대 테두리 설정  */
+    border-radius: 12px 12px 12px 12px;
+  }
+  
+  .container {
+    width: 100%;
+    height: 100%;
+    background-color: var(--main-bg-color);
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+    position: relative;
+  }
+  
+  .white_box {
+    width: 100%;
+    min-width: 0;
+    height: calc(100% - 40px);
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;  
+    overflow: auto;
+  }
+  
+  .header {
+    width: 100%;
+    display: flex;
+    /* background-color: #115FF8; */
+    padding: 10px 0;
+  }
+  .header button {
+    margin-left: 20px;
+    font-size: 20px;
+  }
+  
+  
+  
+  
+  /* modal */
+  .modal_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 0 0 0 10px;
+  }
+  
+  .modal_body {
+    display: flex;
+    flex-direction: column;
+    overflow-x: auto;
+  }
+  
+  .modal_body_box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 10px;
+    /* align-items: center; */
+  }
+  
+  
+  .modal_body_box label {
+    font-size: 20px;
+    font-weight: 400;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .modal_body_box input {
+    width: 100%;
+    height: 50px;
+    margin: 10px auto 30px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    padding: 0 20px;
+    font-size: 16px;
+    font-weight: 400;
+  }
+  
+  .modal_body_box input:disabled {
+    background-color: #eee;
+  }
+  
+  .modal_body_box select {
+    width: 100%;
+    height: 50px;
+    margin: 10px auto 30px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    padding: 0 20px;
+    font-size: 16px;
+    font-weight: 400;
+  }
+  
+  .modal_footer {
+    margin: 0 10px;
+    display: flex;
+  }
+  
+  .modal_footer button {
+    border: 2px solid var(--main-color);
+    background-color: var(--main-color);
+    color: #fff;
+  }
+  .modal_footer button:hover {
+    background-color: var(--main-hovered-color);
+    transform: scale(0.9);
+  }
+  
+  
+  
+  /* 삭제 모달창 전체 스타일 */
+  .delete_modal_container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* 삭제 모달창 헤더 */
+  .delete_modal_header {
+    width: 100%;
+  }
+  .delete_modal_header p {
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 1.4px;
+    margin-top: 10px;
+  }
+  .delete_modal_header p:first-child span {
+    font-weight: 700;
+    color: var(--main-color);
+  }
+  
+  /* 삭제 모달창 버튼 그룹 스타일 */
+  .delete_modal_btn_wrap {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    /* margin-top: 50px; */
+    gap: 10px;
+  }
+  .delete_modal_btn_wrap button {
+    padding: 5px 15px;
+  }
