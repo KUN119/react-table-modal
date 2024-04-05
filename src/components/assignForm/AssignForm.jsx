@@ -16,7 +16,7 @@ const assignFormData = [
 
 export default function AssignForm({ setModalIsOpen }) {
     const handleSave = () => {
-        alert('저장완료!!!!!! fuck!!');
+        alert('저장완료!');
         setModalIsOpen(false);
     }
 

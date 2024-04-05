@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './projectSetting.module.css'
-import Modal from '../../components/Modal';
+import Modal from '../../components/modal/Modal';
 import TableForProject from '../../components/project/TableForProject';
 
 export default function ProjectSetting() {
