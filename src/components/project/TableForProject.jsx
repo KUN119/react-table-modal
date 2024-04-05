@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { createColumnHelper, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
+import { createColumnHelper, flexRender, getCoreRowModel, getPaginationRowModel, useReactTable } from '@tanstack/react-table'
 import styles from './tableForProject.module.css'
 import IndeterminateCheckbox from '../checkBox/IndeterminateCheckbox';
 
@@ -15,7 +15,17 @@ const copyRows = {
     projectCode: 'ABC123',
 }
 let tableData = [
-    
+    {
+        projectName: 'Test 1',
+        managerId: 'MTT@123',
+        expireDate: '2024-03-31',
+        createdAt: '2024-01-15',
+        serviceType: 'Type F',
+        numberOfCamera: 103,
+        numberOfROI: 32,
+        numberOfViewer: 101,
+        projectCode: 'KKK335',
+    }
 ]
 
 const makeRows = () => {
@@ -109,10 +119,18 @@ export default function TableForProject() {
             rowSelection,
         },
         enableRowSelection: true,
-        // 
+        // for pagination
+        getPaginationRowModel: getPaginationRowModel(),
+        initialState: {
+            pagination: {
+              pageIndex: 0, //custom initial page index
+              pageSize: 15, //custom default page size
+            },
+          },
     });
 
-    console.log(rowSelection); // {0: true, 1: true} flase의 경우는 나오지 않음
+    // console.log(rowSelection); // {0: true, 1: true} flase의 경우는 나오지 않음
+    console.log(table.getState().pagination);
 
     return (
         <div>
@@ -145,6 +163,49 @@ export default function TableForProject() {
                     ))}
                 </tbody>
             </table>
+            <div className={styles.pagination}>
+                <div className={styles.buttonContainer}>
+                    <button
+                        onClick={() => table.firstPage()}
+                        disabled={!table.getCanPreviousPage()}
+                    >
+                        {'<<'}
+                    </button>
+                    <button
+                        onClick={() => table.previousPage()}
+                        disabled={!table.getCanPreviousPage()}
+                    >
+                        {'<'}
+                    </button>
+                    <span>Page {table.getState().pagination.pageIndex + 1} of {table.getState().pagination.pageSize + 1}</span>
+                    <button
+                        onClick={() => table.nextPage()}
+                        disabled={!table.getCanNextPage()}
+                    >
+                        {'>'}
+                    </button>
+                    <button
+                        onClick={() => table.lastPage()}
+                        disabled={!table.getCanNextPage()}
+                    >
+                        {'>>'}
+                    </button>
+                </div>
+                {/* <div className={styles.selectContainer}>
+                    <select
+                        value={table.getState().pagination.pageSize}
+                        onChange={e => {
+                            table.setPageSize(Number(e.target.value))
+                        }}
+                    >
+                        {[10, 20, 30, 40, 50].map(pageSize => (
+                            <option key={pageSize} value={pageSize}>
+                                {pageSize}
+                            </option>
+                        ))}
+                    </select>
+                </div> */}
+            </div>
         </div>
     )
 }
