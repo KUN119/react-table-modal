@@ -3,7 +3,6 @@ import React, { useEffect, useRef } from 'react'
 export default function IndeterminateCheckbox({ indeterminate, ...rest}) {
     const ref = useRef(null);
     
-    console.log(ref);
     useEffect(() => {
         if (typeof indeterminate === 'boolean') {
             if (ref.current) {

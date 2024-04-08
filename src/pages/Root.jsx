@@ -2,11 +2,18 @@ import React, { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 
 export default function Root() {
-
   const menuListArr = [
     {
       name: 'Project Setting',
-      path: '/assign'
+      path: '/project'
+    },
+    {
+      name: 'Accounts',
+      path: '/accounts'
+    },
+    {
+      name: 'Model',
+      path: '/model'
     }
   ]
 

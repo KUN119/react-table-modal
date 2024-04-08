@@ -18,9 +18,9 @@
     justify-content: center;
     overflow-x: auto;
     position: relative;
-  }
+}
   
-  .white_box {
+.white_box {
     width: 100%;
     min-width: 0;
     height: calc(100% - 40px);
@@ -29,22 +29,20 @@
     padding: 20px;
     margin: 20px;  
     overflow: auto;
-  }
+}
   
-  .header {
+.header {
     width: 100%;
     display: flex;
     /* background-color: #115FF8; */
     padding: 10px 0;
-  }
-  .header button {
+}
+
+.header button {
     margin-left: 20px;
     font-size: 20px;
-  }
-  
-  
-  
-  
+}
+
   /* modal */
   .modal_header {
     display: flex;

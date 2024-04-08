@@ -4,7 +4,9 @@ import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Root from './pages/Root';
 import ErrorPage from './error-page';
-import Assign from './pages/Assign';
+import Accounts from './pages/accounts/Accounts';
+import Model from './pages/model/Model';
+import ProjectSetting from './pages/projectSetting/ProjectSetting';
 
 const router = createBrowserRouter([
     {
@@ -13,9 +15,17 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
             {
-                path: '/assign',
-                element: <Assign />
-            }
+                path: '/project',
+                element: <ProjectSetting />
+            },
+            {
+                path: '/accounts',
+                element: <Accounts />
+            },
+            {
+                path: '/model',
+                element: <Model />
+            },
         ]
     },
 ]);

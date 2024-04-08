@@ -21,8 +21,8 @@ export default function Modal() {
     return (
         <>
             <button onClick={() => setModalIsOpen(true)}><FiFolderPlus /></button>
-            <button ><FiEdit /></button>
-            <button ><RiDeleteBinLine /></button>
+            <button><FiEdit /></button>
+            <button><RiDeleteBinLine /></button>
             <ReactModal
                 isOpen={modalIsOpen}
                 onRequestClose={() => setModalIsOpen(false)}
