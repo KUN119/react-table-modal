@@ -1,10 +1,11 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import styles from './accounts.module.css';
 import { RiDeleteBinLine } from "react-icons/ri";
 import { PiUserCirclePlusBold } from "react-icons/pi";
 import Table from '../../components/table/Table';
 import IndeterminateCheckbox from '../../components/checkBox/IndeterminateCheckbox';
 import { createColumnHelper, getCoreRowModel, getPaginationRowModel, useReactTable } from '@tanstack/react-table';
+import Search from '../../components/search/Search';
 
 const tableData = [
     {
@@ -80,6 +81,15 @@ export default function Accounts() {
         },
     });
 
+    const handleSearchSubmit = (filterValue) => {
+        const filteredData = tableData.filter(item =>
+            Object.values(item).some(val =>
+                String(val).toLowerCase().includes(filterValue.toLowerCase())
+            )
+        );
+        setData(filteredData);
+    };
+
     return (
         <section className={styles.container}>
             <main className={styles.white_box}>
@@ -87,6 +97,7 @@ export default function Accounts() {
                     <h2>Accounts Table</h2>
                     <button><RiDeleteBinLine /></button>
                     <button><PiUserCirclePlusBold /></button>
+                    <Search onSubmit={handleSearchSubmit} />
                 </header>
                 <Table 
                     table={table}

@@ -56,7 +56,7 @@ export default function Model() {
             columnHelper.accessor('Slide', {header: 'Slide'}),
             columnHelper.accessor('Project', {header: 'Project'}),
             columnHelper.accessor('CreatedAt', {header: 'Created At'}),
-            columnHelper.accessor('DeviceToken', {header: 'Device Token'}),
+            columnHelper.accessor('Description', {header: 'Description'}),
         ];
     }, []);
 

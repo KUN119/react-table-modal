@@ -4,6 +4,7 @@ import Modal from '../../components/modal/Modal';
 import IndeterminateCheckbox from '../../components/checkBox/IndeterminateCheckbox';
 import Table from '../../components/table/Table';
 import { createColumnHelper, getCoreRowModel, getPaginationRowModel, useReactTable } from '@tanstack/react-table';
+import Search from '../../components/search/Search';
 
 const copyRows = {
   projectName: 'Project 1',
@@ -107,12 +108,22 @@ export default function ProjectSetting() {
       },
   });
 
+  const handleSearchSubmit = (filterValue) => {
+    const filteredData = tableData.filter(item =>
+      Object.values(item).some(val =>
+        String(val).toLowerCase().includes(filterValue.toLowerCase())
+      )
+    );
+    setData(filteredData);
+  };  
+
   return (
     <section className={styles.container}>
       <main className={styles.white_box}>
         <header className={styles.header}>
           <h2>Project Table</h2>
           <Modal />
+          <Search onSubmit={handleSearchSubmit} />
         </header>
         <Table 
           table={table}
