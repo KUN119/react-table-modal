@@ -5,6 +5,7 @@ import { PiUserCirclePlusBold } from "react-icons/pi";
 import Table from '../../components/table/Table';
 import { createColumnHelper, getCoreRowModel, getPaginationRowModel, useReactTable } from '@tanstack/react-table';
 import IndeterminateCheckbox from '../../components/checkBox/IndeterminateCheckbox';
+import Search from '../../components/search/Search';
 
 const tableData = [
     {
@@ -20,7 +21,7 @@ const tableData = [
 export default function Model() {
     const [data, setData] = useState([...tableData]);
     const [rowSelection, setRowSelection] = useState({})
-
+    const [editedRows, setEditedRows] = useState({})
     const columnHelper = createColumnHelper();
 
     const columns = useMemo(() => {
@@ -78,7 +79,26 @@ export default function Model() {
                 pageSize: 15, //custom default page size
             },
         },
+        meta: {
+            removeRow: (rowIndex) => {
+                const setFilterFunc = (old) => {
+                    old.filter((_row, index) => index !==rowIndex);
+                    setData(setFilterFunc);
+                }
+            },
+            editedRows,
+            setEditedRows,
+        }
     });
+
+    const handleSearchSubmit = (filterValue) => {
+        const filteredData = tableData.filter(item =>
+            Object.values(item).some(val =>
+                String(val).toLowerCase().includes(filterValue.toLowerCase())
+            )
+        );
+        setData(filteredData);
+    };
 
     return (
         <section className={styles.container}>
@@ -87,6 +107,7 @@ export default function Model() {
                     <h2>Model Table</h2>
                     <button><RiDeleteBinLine /></button>
                     <button><PiUserCirclePlusBold /></button>
+                    <Search onSubmit={handleSearchSubmit} />
                 </header>
                 <Table
                     table={table}

@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import styles from './indeterminateCheckbox.module.css'
 
 export default function IndeterminateCheckbox({ indeterminate, ...rest}) {
     const ref = useRef(null);
-    
+
     useEffect(() => {
         if (typeof indeterminate === 'boolean') {
             if (ref.current) {
@@ -10,12 +11,11 @@ export default function IndeterminateCheckbox({ indeterminate, ...rest}) {
             }
         }
     }, [ref, indeterminate, rest.checked]);
-      
+
     return (
         <input
             type="checkbox"
             ref={ref}
-            className={rest.className + ' cursor-pointer'}
             style={{ width: '30px'}}
             {...rest}
         />

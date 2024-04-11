@@ -5,7 +5,7 @@ import AssignForm from '../assignForm/AssignForm';
 import { FiFolderPlus, FiEdit } from "react-icons/fi";
 import { RiDeleteBinLine } from "react-icons/ri";
 
-export default function Modal() {
+export default function Modal({ MOCK_DATA, setMOCK_DATA }) {
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
     useEffect(() => {
@@ -33,9 +33,10 @@ export default function Modal() {
                 <AssignForm 
                     modalIsOpen={modalIsOpen}
                     setModalIsOpen={setModalIsOpen}
+                    MOCK_DATA={MOCK_DATA}
+                    setMOCK_DATA={setMOCK_DATA}
                 />
             </ReactModal>
         </>
-        
     )
 }

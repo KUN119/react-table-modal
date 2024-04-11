@@ -5,8 +5,21 @@ form {
     width: auto;
 }
 
-.searchButton {
-    margin-left: 1px;
+form button.searchButton {
     border: 1px solid black;
     border-radius: 10%;
+    margin-left: 3px;
+    cursor: pointer;
+    transition: background-color 0.1s, border-color 0.1s; /* Add transition effect */
+}
+
+/* Hover effect */
+form button.searchButton:hover {
+    background-color: lightgray;
+}
+
+/* Click effect */
+form button.searchButton:active {
+    background-color: gray;
+    border-color: darkgray;
 }

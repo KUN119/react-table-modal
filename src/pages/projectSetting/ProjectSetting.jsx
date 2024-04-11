@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import styles from './projectSetting.module.css'
 import Modal from '../../components/modal/Modal';
 import IndeterminateCheckbox from '../../components/checkBox/IndeterminateCheckbox';
@@ -6,48 +6,30 @@ import Table from '../../components/table/Table';
 import { createColumnHelper, getCoreRowModel, getPaginationRowModel, useReactTable } from '@tanstack/react-table';
 import Search from '../../components/search/Search';
 
-const copyRows = {
-  projectName: 'Project 1',
-  managerId: 'M123',
-  expireDate: '2024-03-31',
-  createdAt: '2024-01-15',
-  serviceType: 'Type A',
-  numberOfCamera: 5,
-  numberOfROI: 3,
-  numberOfViewer: 10,
-  projectCode: 'ABC123',
-}
-
-let tableData = [
-  {
-    projectName: 'Test 1',
-    managerId: 'MTT@123',
-    expireDate: '2024-03-31',
-    createdAt: '2024-01-15',
-    serviceType: 'Type F',
-    numberOfCamera: 103,
-    numberOfROI: 32,
-    numberOfViewer: 101,
-    projectCode: 'KKK335',
-  }
-]
-
-const makeRows = () => {
-  for(let i = 0; i < 100; i++) {
-    tableData.push(copyRows);
-  }
-}
-
-makeRows();
-
 export default function ProjectSetting() {
-  const [data, setData] = useState([...tableData]);
+  const [MOCK_DATA, setMOCK_DATA] = useState([
+    {
+      projectName: 'Project 1',
+      managerId: 'M123',
+      expireDate: '2024-03-31',
+      createdAt: '2024-01-15',
+      serviceType: 'Type A',
+      numberOfCamera: 5,
+      numberOfROI: 3,
+      numberOfViewer: 10,
+      projectCode: 'ABC123',
+    }
+  ]);
+  const [data, setData] = useState([...MOCK_DATA]);
   const [rowSelection, setRowSelection] = useState({})
+
+  useEffect(() => {
+    setData([...MOCK_DATA]); // Update data whenever MOCK_DATA changes
+  }, [MOCK_DATA]);
 
   // Column Defs 만들기
   // Column Defs: 각 컬럼과 그 컬럼의 데이터 모델, 화면 구성 등을 설정하는 데 사용하는 객체를 의미합니다.
   const columnHelper = createColumnHelper();
-
   const columns = useMemo(() => {
     return [
       {
@@ -89,27 +71,27 @@ export default function ProjectSetting() {
   }, []);
 
   const table = useReactTable({
-      data,
-      columns,
-      getCoreRowModel: getCoreRowModel(),
-      // for checkbox
-      onRowSelectionChange: setRowSelection,
-      state: {
-          rowSelection,
+    data,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    // for checkbox
+    onRowSelectionChange: setRowSelection,
+    state: {
+        rowSelection,
+    },
+    enableRowSelection: true,
+    // for pagination
+    getPaginationRowModel: getPaginationRowModel(),
+    initialState: {
+      pagination: {
+        pageIndex: 0, //custom initial page index
+        pageSize: 15, //custom default page size
       },
-      enableRowSelection: true,
-      // for pagination
-      getPaginationRowModel: getPaginationRowModel(),
-      initialState: {
-          pagination: {
-              pageIndex: 0, //custom initial page index
-              pageSize: 15, //custom default page size
-          },
-      },
+    },
   });
 
   const handleSearchSubmit = (filterValue) => {
-    const filteredData = tableData.filter(item =>
+    const filteredData = MOCK_DATA.filter(item =>
       Object.values(item).some(val =>
         String(val).toLowerCase().includes(filterValue.toLowerCase())
       )
@@ -122,12 +104,13 @@ export default function ProjectSetting() {
       <main className={styles.white_box}>
         <header className={styles.header}>
           <h2>Project Table</h2>
-          <Modal />
+          <Modal 
+            MOCK_DATA={MOCK_DATA}
+            setMOCK_DATA={setMOCK_DATA}
+          />
           <Search onSubmit={handleSearchSubmit} />
         </header>
-        <Table 
-          table={table}
-        />
+        <Table table={table} />
       </main>
     </section>
   );
