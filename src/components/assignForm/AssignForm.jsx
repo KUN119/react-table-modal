@@ -24,12 +24,9 @@ export default function AssignForm({ setModalIsOpen, MOCK_DATA, setMOCK_DATA }) 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
         const updatedData = [...MOCK_DATA];
         updatedData.push(form);
         setMOCK_DATA(updatedData)
-        
-        console.log(updatedData);
         setModalIsOpen(false)
     }
 

@@ -2,10 +2,9 @@ import { useEffect, useState } from 'react';
 import ReactModal from 'react-modal';
 import styles from './modal.module.css';
 import AssignForm from '../assignForm/AssignForm';
-import { FiFolderPlus, FiEdit } from "react-icons/fi";
-import { RiDeleteBinLine } from "react-icons/ri";
+import { FiFolderPlus } from "react-icons/fi";
 
-export default function Modal({ MOCK_DATA, setMOCK_DATA }) {
+export default function Modal({ MOCK_DATA, setMOCK_DATA, columns }) {
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
     useEffect(() => {
@@ -21,8 +20,6 @@ export default function Modal({ MOCK_DATA, setMOCK_DATA }) {
     return (
         <>
             <button onClick={() => setModalIsOpen(true)}><FiFolderPlus /></button>
-            <button><FiEdit /></button>
-            <button><RiDeleteBinLine /></button>
             <ReactModal
                 isOpen={modalIsOpen}
                 onRequestClose={() => setModalIsOpen(false)}

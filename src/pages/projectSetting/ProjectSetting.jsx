@@ -5,9 +5,13 @@ import IndeterminateCheckbox from '../../components/checkBox/IndeterminateCheckb
 import Table from '../../components/table/Table';
 import { createColumnHelper, getCoreRowModel, getPaginationRowModel, useReactTable } from '@tanstack/react-table';
 import Search from '../../components/search/Search';
+import { FiEdit } from "react-icons/fi";
+import { RiDeleteBinLine } from "react-icons/ri";
 
-export default function ProjectSetting() {
-  const [MOCK_DATA, setMOCK_DATA] = useState([
+const arr = [];
+
+for(let i = 0; i < 100; i++) {
+  arr.push(
     {
       projectName: 'Project 1',
       managerId: 'M123',
@@ -19,7 +23,13 @@ export default function ProjectSetting() {
       numberOfViewer: 10,
       projectCode: 'ABC123',
     }
-  ]);
+  )
+}
+console.log(arr);
+
+export default function ProjectSetting() {
+  const [MOCK_DATA, setMOCK_DATA] = useState(arr);
+
   const [data, setData] = useState([...MOCK_DATA]);
   const [rowSelection, setRowSelection] = useState({})
 
@@ -99,6 +109,13 @@ export default function ProjectSetting() {
     setData(filteredData);
   };  
 
+  const handleDelete = () => {
+    const selectedIndices = Object.keys(table.getState().rowSelection);
+    const updatedData = MOCK_DATA.filter((_, index) => !selectedIndices.includes(String(index)));
+    setMOCK_DATA(updatedData);
+    setRowSelection({});
+  }
+
   return (
     <section className={styles.container}>
       <main className={styles.white_box}>
@@ -107,7 +124,10 @@ export default function ProjectSetting() {
           <Modal 
             MOCK_DATA={MOCK_DATA}
             setMOCK_DATA={setMOCK_DATA}
+            columns={columns}
           />
+          <button><FiEdit /></button>
+          <button onClick={handleDelete}><RiDeleteBinLine /></button>
           <Search onSubmit={handleSearchSubmit} />
         </header>
         <Table table={table} />
