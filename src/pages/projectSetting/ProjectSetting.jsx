@@ -5,33 +5,38 @@ import IndeterminateCheckbox from '../../components/checkBox/IndeterminateCheckb
 import Table from '../../components/table/Table';
 import { createColumnHelper, getCoreRowModel, getPaginationRowModel, useReactTable } from '@tanstack/react-table';
 import Search from '../../components/search/Search';
-import { FiEdit } from "react-icons/fi";
 import { RiDeleteBinLine } from "react-icons/ri";
+import { FiEdit } from "react-icons/fi";
+import Edit from '../../components/edit/Edit';
 
 const arr = [];
 
 for(let i = 0; i < 100; i++) {
   arr.push(
     {
-      projectName: 'Project 1',
-      managerId: 'M123',
+      projectName: `Project ${i+1}`,
+      managerId: `M123${i*i}@naver.com`,
       expireDate: '2024-03-31',
       createdAt: '2024-01-15',
       serviceType: 'Type A',
       numberOfCamera: 5,
       numberOfROI: 3,
       numberOfViewer: 10,
-      projectCode: 'ABC123',
+      projectCode: `ABC123${(i+3)*i}`,
     }
   )
 }
-console.log(arr);
+
+// console.log(arr);
+// arr.map((i, index) => {
+//   console.log('item: ', i)
+//   console.log('index: ', index)
+// });
 
 export default function ProjectSetting() {
   const [MOCK_DATA, setMOCK_DATA] = useState(arr);
-
   const [data, setData] = useState([...MOCK_DATA]);
-  const [rowSelection, setRowSelection] = useState({})
+  const [rowSelection, setRowSelection] = useState({});
 
   useEffect(() => {
     setData([...MOCK_DATA]); // Update data whenever MOCK_DATA changes
@@ -124,9 +129,12 @@ export default function ProjectSetting() {
           <Modal 
             MOCK_DATA={MOCK_DATA}
             setMOCK_DATA={setMOCK_DATA}
-            columns={columns}
           />
-          <button><FiEdit /></button>
+          <Edit 
+            MOCK_DATA={MOCK_DATA}
+            setMOCK_DATA={setMOCK_DATA}
+            table={table}
+          />
           <button onClick={handleDelete}><RiDeleteBinLine /></button>
           <Search onSubmit={handleSearchSubmit} />
         </header>

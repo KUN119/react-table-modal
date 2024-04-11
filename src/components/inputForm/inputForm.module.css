@@ -1,0 +1,56 @@
+.assignFormContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.assignFormHeader {
+}
+
+.assignFormHeader button {
+    margin: 0;
+    padding-top: 5px;
+    padding-left: 5px;
+    size: 10rem;
+}
+
+.logoImage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 10vw;
+    height: 13vh;
+    border: 2px solid gray;
+    border-radius: 100%;
+    margin: 0 auto;
+}
+
+.formContainer{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.formContainer label{
+    width: 80%;
+    margin-top: 20px;
+    font-size: 10px;
+}
+
+.formContainer input{
+    width: 80%;
+    border: none;
+    border-bottom: 1px solid gray;
+    outline: none;
+    font-size: 13px;
+}
+
+.formContainer button{
+    justify-content: center;
+    margin-top: 20px;
+    background-color: rgba(16, 67, 246, 0.9);
+    border-radius: 5px;
+    color: white;
+    width: 80%;
+    height: 30px;
+}

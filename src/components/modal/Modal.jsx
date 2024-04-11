@@ -4,7 +4,7 @@ import styles from './modal.module.css';
 import AssignForm from '../assignForm/AssignForm';
 import { FiFolderPlus } from "react-icons/fi";
 
-export default function Modal({ MOCK_DATA, setMOCK_DATA, columns }) {
+export default function Modal({ MOCK_DATA, setMOCK_DATA }) {
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
     useEffect(() => {
