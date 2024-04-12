@@ -1,13 +1,13 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import styles from './model.module.css';
-import { RiDeleteBinLine } from "react-icons/ri";
 import { PiUserCirclePlusBold } from "react-icons/pi";
 import Table from '../../components/table/Table';
 import { createColumnHelper, getCoreRowModel, getPaginationRowModel, useReactTable } from '@tanstack/react-table';
 import IndeterminateCheckbox from '../../components/checkBox/IndeterminateCheckbox';
 import Search from '../../components/search/Search';
+import DeleteRow from '../../components/deleteRow/DeleteRow';
 
-const tableData = [
+const arr = [
     {
         ID: 'MTT@123',
         Role: 'Editor',
@@ -19,11 +19,15 @@ const tableData = [
 ]
 
 export default function Model() {
-    const [data, setData] = useState([...tableData]);
-    const [rowSelection, setRowSelection] = useState({})
-    const [editedRows, setEditedRows] = useState({})
-    const columnHelper = createColumnHelper();
+    const [MOCK_DATA, setMOCK_DATA] = useState(arr);
+    const [data, setData] = useState([...MOCK_DATA]);
+    const [rowSelection, setRowSelection] = useState({});
 
+    useEffect(() => {
+      setData([...MOCK_DATA]);
+    }, [MOCK_DATA]);
+    
+    const columnHelper = createColumnHelper();
     const columns = useMemo(() => {
         return [
             {
@@ -67,10 +71,10 @@ export default function Model() {
         getCoreRowModel: getCoreRowModel(),
         // for checkbox
         onRowSelectionChange: setRowSelection,
-        state: {
-            rowSelection,
-        },
         enableRowSelection: true,
+        state: {
+            rowSelection
+        },
         // for pagination
         getPaginationRowModel: getPaginationRowModel(),
         initialState: {
@@ -79,20 +83,10 @@ export default function Model() {
                 pageSize: 15, //custom default page size
             },
         },
-        meta: {
-            removeRow: (rowIndex) => {
-                const setFilterFunc = (old) => {
-                    old.filter((_row, index) => index !==rowIndex);
-                    setData(setFilterFunc);
-                }
-            },
-            editedRows,
-            setEditedRows,
-        }
     });
 
     const handleSearchSubmit = (filterValue) => {
-        const filteredData = tableData.filter(item =>
+        const filteredData = data.filter(item =>
             Object.values(item).some(val =>
                 String(val).toLowerCase().includes(filterValue.toLowerCase())
             )
@@ -105,13 +99,16 @@ export default function Model() {
             <main className={styles.white_box}>
                 <header className={styles.header}>
                     <h2>Model Table</h2>
-                    <button><RiDeleteBinLine /></button>
+                    <DeleteRow 
+                        setMOCK_DATA={setMOCK_DATA}
+                        rowSelection={rowSelection}
+                        setRowSelection={setRowSelection}
+                        data={data}
+                    />
                     <button><PiUserCirclePlusBold /></button>
                     <Search onSubmit={handleSearchSubmit} />
                 </header>
-                <Table
-                    table={table}
-                />
+                <Table table={table}/>
             </main>
         </section>
     )

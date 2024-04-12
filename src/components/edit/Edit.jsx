@@ -41,7 +41,6 @@ export default function Edit({ MOCK_DATA, setMOCK_DATA, rowSelection }) {
                 overlayClassName={styles.customOverlay}
             >
                 <InputForm  
-                    modalIsOpen={modalIsOpen}
                     setModalIsOpen={setModalIsOpen}
                     setMOCK_DATA={setMOCK_DATA}
                     form={form}

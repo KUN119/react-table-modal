@@ -5,8 +5,8 @@ import IndeterminateCheckbox from '../../components/checkBox/IndeterminateCheckb
 import Table from '../../components/table/Table';
 import { createColumnHelper, getCoreRowModel, getPaginationRowModel, useReactTable } from '@tanstack/react-table';
 import Search from '../../components/search/Search';
-import { RiDeleteBinLine } from "react-icons/ri";
 import Edit from '../../components/edit/Edit';
+import DeleteRow from '../../components/deleteRow/DeleteRow';
 
 const arr = [];
 
@@ -84,10 +84,10 @@ export default function ProjectSetting() {
     getCoreRowModel: getCoreRowModel(),
     // for checkbox
     onRowSelectionChange: setRowSelection,
-    state: {
-      rowSelection,
-    },
     enableRowSelection: true,
+    state: {
+      rowSelection
+    },
     // for pagination
     getPaginationRowModel: getPaginationRowModel(),
     initialState: {
@@ -107,13 +107,6 @@ export default function ProjectSetting() {
     setData(filteredData);
   };  
 
-  const handleDelete = () => {
-    const selectedIndices = Object.keys(table.getState().rowSelection);
-    const updatedData = MOCK_DATA.filter((_, index) => !selectedIndices.includes(String(index)));
-    setMOCK_DATA(updatedData);
-    setRowSelection({});
-  }
-
   return (
     <section className={styles.container}>
       <main className={styles.white_box}>
@@ -128,7 +121,12 @@ export default function ProjectSetting() {
             setMOCK_DATA={setMOCK_DATA}
             rowSelection={rowSelection}
           />
-          <button onClick={handleDelete}><RiDeleteBinLine /></button>
+          <DeleteRow
+            setMOCK_DATA={setMOCK_DATA}
+            rowSelection={rowSelection}
+            setRowSelection={setRowSelection}
+            data={data}
+          />
           <Search onSubmit={handleSearchSubmit} />
         </header>
         <Table table={table} />

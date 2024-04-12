@@ -28,7 +28,6 @@ export default function Modal({ MOCK_DATA, setMOCK_DATA }) {
                 overlayClassName={styles.customOverlay}
             >
                 <AssignForm 
-                    modalIsOpen={modalIsOpen}
                     setModalIsOpen={setModalIsOpen}
                     MOCK_DATA={MOCK_DATA}
                     setMOCK_DATA={setMOCK_DATA}

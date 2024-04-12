@@ -1,13 +1,13 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import styles from './accounts.module.css';
-import { RiDeleteBinLine } from "react-icons/ri";
 import { PiUserCirclePlusBold } from "react-icons/pi";
 import Table from '../../components/table/Table';
 import IndeterminateCheckbox from '../../components/checkBox/IndeterminateCheckbox';
 import { createColumnHelper, getCoreRowModel, getPaginationRowModel, useReactTable } from '@tanstack/react-table';
 import Search from '../../components/search/Search';
+import DeleteRow from '../../components/deleteRow/DeleteRow';
 
-const tableData = [
+const arr = [
     {
         ID: 'MTT@123',
         Role: 'Editor',
@@ -19,11 +19,15 @@ const tableData = [
 ]
 
 export default function Accounts() {
-    const [data, setData] = useState([...tableData]);
-    const [rowSelection, setRowSelection] = useState({})
+    const [MOCK_DATA, setMOCK_DATA] = useState(arr);
+    const [data, setData] = useState([...MOCK_DATA]);
+    const [rowSelection, setRowSelection] = useState({});
+
+    useEffect(() => {
+        setData([...MOCK_DATA]);
+      }, [MOCK_DATA]);
 
     const columnHelper = createColumnHelper();
-
     const columns = useMemo(() => {
         return [
             {
@@ -82,7 +86,7 @@ export default function Accounts() {
     });
 
     const handleSearchSubmit = (filterValue) => {
-        const filteredData = tableData.filter(item =>
+        const filteredData = data.filter(item =>
             Object.values(item).some(val =>
                 String(val).toLowerCase().includes(filterValue.toLowerCase())
             )
@@ -95,7 +99,12 @@ export default function Accounts() {
             <main className={styles.white_box}>
                 <header className={styles.header}>
                     <h2>Accounts Table</h2>
-                    <button><RiDeleteBinLine /></button>
+                    <DeleteRow
+                        setMOCK_DATA={setMOCK_DATA}
+                        rowSelection={rowSelection}
+                        setRowSelection={setRowSelection}
+                        data={data}
+                    />
                     <button><PiUserCirclePlusBold /></button>
                     <Search onSubmit={handleSearchSubmit} />
                 </header>
