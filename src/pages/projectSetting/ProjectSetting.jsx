@@ -6,7 +6,6 @@ import Table from '../../components/table/Table';
 import { createColumnHelper, getCoreRowModel, getPaginationRowModel, useReactTable } from '@tanstack/react-table';
 import Search from '../../components/search/Search';
 import { RiDeleteBinLine } from "react-icons/ri";
-import { FiEdit } from "react-icons/fi";
 import Edit from '../../components/edit/Edit';
 
 const arr = [];
@@ -26,12 +25,6 @@ for(let i = 0; i < 100; i++) {
     }
   )
 }
-
-// console.log(arr);
-// arr.map((i, index) => {
-//   console.log('item: ', i)
-//   console.log('index: ', index)
-// });
 
 export default function ProjectSetting() {
   const [MOCK_DATA, setMOCK_DATA] = useState(arr);
@@ -92,7 +85,7 @@ export default function ProjectSetting() {
     // for checkbox
     onRowSelectionChange: setRowSelection,
     state: {
-        rowSelection,
+      rowSelection,
     },
     enableRowSelection: true,
     // for pagination
@@ -133,7 +126,7 @@ export default function ProjectSetting() {
           <Edit 
             MOCK_DATA={MOCK_DATA}
             setMOCK_DATA={setMOCK_DATA}
-            table={table}
+            rowSelection={rowSelection}
           />
           <button onClick={handleDelete}><RiDeleteBinLine /></button>
           <Search onSubmit={handleSearchSubmit} />

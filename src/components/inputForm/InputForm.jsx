@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './inputForm.module.css';
 import { IoChevronBackSharp } from "react-icons/io5";
 
-export default function InputForm({ selectedIndex, form, setForm, setModalIsOpen, MOCK_DATA, setMOCK_DATA }) {
+export default function InputForm({ selectedIndex, form, setForm, setModalIsOpen, setMOCK_DATA }) {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setForm({ ...form, [name]: value })
@@ -13,7 +13,7 @@ export default function InputForm({ selectedIndex, form, setForm, setModalIsOpen
 
         setMOCK_DATA((prevData) => {
             const updatedData = [...prevData]; // 이전 데이터를 복제하여 새로운 배열 생성
-            updatedData[selectedIndex] = form; // 선택된 인덱스에 새로운 form을 할당
+            updatedData[selectedIndex] = form; // 선택된 인덱스에 새로운 form을 할당\
             return updatedData; // 업데이트된 배열 반환
         });
 

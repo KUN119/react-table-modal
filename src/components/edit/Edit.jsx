@@ -5,7 +5,7 @@ import { FiEdit } from "react-icons/fi";
 import styles from './edit.module.css';
 import InputForm from '../inputForm/InputForm';
 
-export default function Edit({ MOCK_DATA, setMOCK_DATA, table }) {
+export default function Edit({ MOCK_DATA, setMOCK_DATA, rowSelection }) {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [form, setForm] = useState({})
     const [selectedIndex, setSelectedIndex] = useState();
@@ -19,14 +19,13 @@ export default function Edit({ MOCK_DATA, setMOCK_DATA, table }) {
     }, []);
 
     const handleEdit = () => {
-        const selectedIndices = Object.keys(table.getState().rowSelection);
+        const selectedIndices = Object.keys(rowSelection);
 
-        if(selectedIndices.length !== 1) {
+        if (selectedIndices.length !== 1) {
             alert('한 가지만 선택해주세요.')
-        }
-        if(selectedIndices.length === 1) {
-            setSelectedIndex(selectedIndices.join(''))
-            setForm(MOCK_DATA[selectedIndex])
+        } else {
+            setSelectedIndex(parseInt(selectedIndices[0]))
+            setForm(MOCK_DATA[parseInt(selectedIndices[0])])
             setModalIsOpen(true);
         }
     }
@@ -44,7 +43,6 @@ export default function Edit({ MOCK_DATA, setMOCK_DATA, table }) {
                 <InputForm  
                     modalIsOpen={modalIsOpen}
                     setModalIsOpen={setModalIsOpen}
-                    MOCK_DATA={MOCK_DATA}
                     setMOCK_DATA={setMOCK_DATA}
                     form={form}
                     setForm={setForm}
